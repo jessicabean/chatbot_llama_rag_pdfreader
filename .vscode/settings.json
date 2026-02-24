@@ -1,0 +1,23 @@
+{
+    "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/venv/**": true,
+        "**/.venv/**": true,
+        "**/__pycache__/**": true,
+        "**/.cache/**": true
+    },
+    "files.exclude": {
+        "**/venv": true,
+        "**/__pycache__": true
+    },
+    "search.exclude": {
+        "**/venv/**": true,
+        "**/.venv/**": true,
+        "**/__pycache__/**": true
+    },
+    "python.analysis.indexing": false,
+    "python.analysis.exclude": [
+        "**/venv/**"
+    ]
+}

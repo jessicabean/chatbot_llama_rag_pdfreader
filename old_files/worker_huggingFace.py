@@ -2,11 +2,11 @@ import os
 import torch
 from langchain import PromptTemplate
 from langchain.chains import RetrievalQA
-from langchain.embeddings import HuggingFaceInstructEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
-from langchain.llms import HuggingFaceHub
+from langchain_huggingface import HuggingFaceHub
 
 # Check for GPU availability and set the appropriate device for computation.
 DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
@@ -29,7 +29,7 @@ def init_llm():
     llm_hub = HuggingFaceHub(repo_id=model_id, model_kwargs={"temperature": 0.1, "max_new_tokens": 600, "max_length": 600})
 
     #Initialize embeddings using a pre-trained model to represent the text data.
-    embeddings = HuggingFaceInstructEmbeddings(
+    embeddings = HuggingFaceEmbeddings(
         model_name="sentence-transformers/all-MiniLM-L6-v2", model_kwargs={"device": DEVICE}
     )
 
