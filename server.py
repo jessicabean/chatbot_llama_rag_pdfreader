@@ -2,7 +2,7 @@ import logging
 import os
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
-import workerv2  # Import the worker module
+import worker  # Import the worker module
 
 # Initialize Flask app and CORS
 app = Flask(__name__)
@@ -12,7 +12,7 @@ app.logger.setLevel(logging.ERROR)
 # Define the route for the index page
 @app.route('/', methods=['GET'])
 def index():
-    workerv2.clear_document()
+    worker.clear_document()
     return render_template('index.html')  # Render the index.html template
 
 # Define the route for processing messages
@@ -21,7 +21,7 @@ def process_message_route():
     user_message = request.json['userMessage']  # Extract the user's message from the request
     print('user_message', user_message)
 
-    bot_response = workerv2.process_prompt(user_message)  # Process the user's message using the worker module
+    bot_response = worker.process_prompt(user_message)  # Process the user's message using the worker module
 
     # Return the bot's response as JSON
     return jsonify({
@@ -43,7 +43,7 @@ def process_document_route():
     file_path = file.filename  # Define the path where the file will be saved
     file.save(file_path)  # Save the file
 
-    workerv2.process_document(file_path)  # Process the document using the worker module
+    worker.process_document(file_path)  # Process the document using the worker module
 
     # Return a success message as JSON
     return jsonify({

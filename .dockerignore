@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Uploads (your PDFs)
+uploads/
+*.pdf
+
+# Models (if downloaded locally)
+models/
+*.bin
+*.safetensors
+
+# Logs
+*.log
+
+# Environment
+.env
+
+# Other unused files
+old_files/
+experimental/
