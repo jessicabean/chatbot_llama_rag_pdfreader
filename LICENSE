@@ -199,3 +199,22 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+
+---
+
+NOTICE
+
+This project includes code originally developed as part of the IBM AI Developer 
+Professional Certificate, licensed under Apache License 2.0.
+
+Original work Copyright IBM Corporation
+Modified work Copyright 2026 Jessica Bean
+
+Modifications include:
+- Migration from WatsonX API to local Llama 3.2 1B model
+- Complete dependency resolution and import updates
+- RAG chain optimization and debugging
+- Custom prompt engineering and output formatting
+- Context window optimization
+
+See README.md for detailed list of modifications.
