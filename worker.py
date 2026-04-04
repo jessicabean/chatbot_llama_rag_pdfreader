@@ -1,7 +1,5 @@
-import os
 import torch
 import logging
-import flask
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -41,6 +39,7 @@ def init_llm():
     llm_pipeline = pipeline(
         task="text-generation", 
         model=model_name,
+        # Answers were being truncated - had to override the pipeline token restrictions to fix
         max_new_tokens=1024,
         model_kwargs={},
     )
@@ -64,7 +63,6 @@ def init_llm():
             "generation_config": None,
             # Set pad_token_id explicitly to eliminate informational warnings about setting it
             "pad_token_id": 128001,
-            #"streaming": True,
         }
     )
 
