@@ -65,7 +65,6 @@ def init_llm():
             # Set pad_token_id explicitly to eliminate informational warnings about setting it
             "pad_token_id": 128001,
             #"streaming": True,
-            #"eos_token_id": [128009],
         }
     )
 
@@ -103,7 +102,7 @@ def process_document(document_path):
     logger.debug("Chroma vector store initialized.")
 
     # Custom prompt template
-    prompt_template = """You are a helpful assistant answering questions about documents. Use the following context to answer the question.If you don't know the answer, just say that you don't know, don't try to make up an answer.
+    prompt_template = """You are a helpful assistant answering questions about documents. Use the following context to answer the question. If you don't know the answer, just say that you don't know, don't try to make up an answer.
     Context: {context}
     Question: {question}
     Instructions: Answer ONLY the specific question asked. Be concise. Do not include extra information from the context unless directly relevant to answering the question.
@@ -132,7 +131,7 @@ def process_document(document_path):
         chain_type="stuff", 
         # Search engine for the chunks (mmr)
         # Search parameters (return 6 chunks, prefer diversity - higher = more similar chunks)
-        retriever=db.as_retriever(search_type="mmr", search_kwargs={'k': 6, 'lambda_mult': 0.25}),
+        retriever=db.as_retriever(search_type="mmr", search_kwargs={'k': 3, 'lambda_mult': 0.25}),
         # If True would also return source chunks (not just LLM answer text)
         return_source_documents=False,
         # Expects a question format in prompt
@@ -141,14 +140,6 @@ def process_document(document_path):
         chain_type_kwargs={"prompt": PROMPT},
     )
     logger.info("RetrievalQA chain created successfully.")
-
-def clear_document():
-    '''
-    Upon page reload, clear conversation_retrieval_chain to allow a new document to be uploaded
-        and prevent intermixing of document data.
-    '''
-    # Reset conversation_retrieval_chain to allow for a new document to be processed
-    conversation_retrieval_chain = None
 
 def process_prompt(prompt):
     '''
@@ -165,7 +156,6 @@ def process_prompt(prompt):
 
     # Query the model using the .invoke() method
     output = conversation_retrieval_chain.invoke({"question": prompt, "chat_history": chat_history})
-    answer = output["result"]
     answer = output["result"]
     answer_index = answer.find("Answer: ") + 8
     answer = answer[answer_index:]
