@@ -60,9 +60,8 @@ from langchain_classic.chains import RetrievalQA
 **Challenge:** Pipeline initialization generated cryptic warnings about conflicting generation configs and missing token IDs.
 
 **Approach:** Rather than suppressing warnings, investigated root causes by:
-- Reading Llama 3.2 model card documentation
-- Examining transformers source code
-- Testing parameter combinations
+- Examined warnings and recommendations, checking documentation as needed
+- Tested parameter combinations
 
 **Solutions Implemented:**
 ```python
